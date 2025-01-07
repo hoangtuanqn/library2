@@ -1,0 +1,266 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1,
+h2,
+h3 {
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Header */
+nav {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Hero Section */
+.hero {
+    background-color: #007bff;
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* Book List */
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.book-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    width: calc(25% - 40px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.book-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.book-item h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.book-item p {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+/* Custom Styles */
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #f8f9fa;
+}
+
+.hero {
+    background-color: #007bff;
+    color: white;
+    padding: 100px 0;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.25rem;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    height: 300px;
+    object-fit: cover;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+/* Custom Styles for Login Page */
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #f8f9fa;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.alert {
+    margin-bottom: 1rem;
+}
+
+.text-center a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}
+
+/* Bình luận của admin */
+.comment-admin {
+    background-color: #f8f9fa; /* Màu nền nhạt */
+    border-left: 4px solid #007bff; /* Viền trái màu xanh */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+/* Phản hồi của admin */
+.reply-admin {
+    background-color: #e9ecef; /* Màu nền nhạt hơn */
+    border-left: 4px solid #28a745; /* Viền trái màu xanh lá */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    margin-left: 20px; /* Thụt lề so với bình luận gốc */
+}
+
+/* Bình luận của người dùng */
+.comment-user {
+    background-color: #ffffff; /* Màu nền trắng */
+    border-left: 4px solid #6c757d; /* Viền trái màu xám */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+/* Phản hồi của người dùng */
+.reply-user {
+    background-color: #f8f9fa; /* Màu nền nhạt */
+    border-left: 4px solid #6c757d; /* Viền trái màu xám */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    margin-left: 20px; /* Thụt lề so với bình luận gốc */
+}
+
+/* Trạng thái "Borrowed" */
+.status-borrowed {
+    background-color: #ffcccc; /* Màu nền đỏ nhạt */
+    color: #cc0000; /* Màu chữ đỏ đậm */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Trạng thái "Returned" */
+.status-returned {
+    background-color: #ccffcc; /* Màu nền xanh lá nhạt */
+    color: #006600; /* Màu chữ xanh lá đậm */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Trạng thái "Overdue" */
+.status-overdue {
+    background-color: #ffebcc; /* Màu nền cam nhạt */
+    color: #cc8400; /* Màu chữ cam đậm */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
