@@ -7,8 +7,8 @@ $ip_address = $_SERVER['REMOTE_ADDR'];
 // Lấy ngày hiện tại
 $visit_date = date('Y-m-d');
 
-// Kiểm tra xem IP này đã truy cập trong ngày chưa
-$sql = "SELECT id FROM visits WHERE ip_address = '$ip_address' AND visit_date = '$visit_date'";
+    // Kiểm tra xem IP này đã truy cập trong ngày chưa
+    $sql = "SELECT id FROM visits WHERE ip_address = '$ip_address' AND visit_date = '$visit_date'";
 $result = $conn->query($sql);
 
 if ($result->num_rows == 0) {

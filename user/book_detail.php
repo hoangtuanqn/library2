@@ -100,6 +100,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['reply'])) {
     }
 }
 
+// Xử lý báo cáo lỗi
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['report_issue'])) {
+    $issue = $_POST['issue'];
+    $user_id = $_SESSION['user_id'];
+    $book_id = $book['id'];
+    $report_date = date('Y-m-d');
+
+    // Kiểm tra xem người dùng đã report sách này chưa
+    $sql = "SELECT * FROM reports WHERE user_id = $user_id AND book_id = $book_id";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $report_error = "You have already reported an issue for this book."; // Thông báo lỗi nếu đã report
+    } else {
+        // Thêm báo cáo vào database
+        $sql = "INSERT INTO reports (user_id, book_id, issue, report_date) 
+                VALUES ('$user_id', '$book_id', '$issue', '$report_date')";
+        if ($conn->query($sql) === TRUE) {
+            $report_success = "Report submitted successfully!"; // Thông báo thành công
+        } else {
+            $report_error = "Error submitting report: " . $conn->error; // Thông báo lỗi
+        }
+    }
+}
+
 // Lấy tất cả bình luận và phản hồi
 $sql = "SELECT c.*, u.username 
         FROM comments c 
@@ -125,6 +150,16 @@ foreach ($comments as $comment) {
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Detail - User</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
 <body>
     <!-- Navbar -->
     <?php include_once '../includes/header.php'; ?>
@@ -149,13 +184,15 @@ foreach ($comments as $comment) {
                 <p><strong>Quantity:</strong> <?php echo $book['quantity']; ?></p>
                 <p><strong>Description:</strong> <?php echo $book['description']; ?></p>
 
-                <!-- Nút mượn sách -->
+                <!-- Nút mượn sách và report -->
                 <?php if ($is_borrowing): ?>
                     <button class="btn btn-secondary" disabled>You are currently borrowing this book.</button>
                 <?php elseif ($book['quantity'] > 0): ?>
-                    <form method="POST">
+                    <form method="POST" class="d-inline">
                         <button type="submit" name="borrow_book" class="btn btn-primary" onclick="return confirmBorrow(<?php echo $book['quantity']; ?>)">Borrow This Book</button>
                     </form>
+                    <!-- Nút Report -->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#reportModal">Report Issue</button>
                 <?php else: ?>
                     <button class="btn btn-secondary" disabled>This book is out of stock.</button>
                 <?php endif; ?>
@@ -222,6 +259,37 @@ foreach ($comments as $comment) {
                         </div>
                     <?php endforeach; ?>
                 <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Report -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">Report an Issue</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php if (isset($report_success)): ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo $report_success; ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($report_error)): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $report_error; ?>
+                        </div>
+                    <?php endif; ?>
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label for="issue" class="form-label">Describe the issue</label>
+                            <textarea class="form-control" id="issue" name="issue" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" name="report_issue" class="btn btn-warning">Submit Report</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
